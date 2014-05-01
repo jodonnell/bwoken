@@ -18,6 +18,7 @@ module Bwoken
     end
 
     def device_family
+      return 'iphone' if Device.device_type == 'ipod'
       Device.device_type
     end
 
