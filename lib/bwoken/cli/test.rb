@@ -51,6 +51,7 @@ BANNER
       #       :product-name     - the name of the generated .app file if it is different from the name of the project/workspace
       #       :configuration    - typically "Debug" or "Release"
       #       :sdk-version      - the version of the sdk to use when building
+      #       :run-all          - runs all tests
       def initialize opts
         opts = opts.to_hash if opts.is_a?(Slop)
         self.options = opts.to_hash.tap do |o|
@@ -110,6 +111,7 @@ BANNER
           s.focus = options[:focus]
           s.formatter = options[:formatter]
           s.simulator = options[:simulator]
+          s.run_all = !!options[:'run-all']
         end.execute
       end
 

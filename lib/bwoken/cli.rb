@@ -37,6 +37,7 @@ opts = Slop.parse :help => true do
     on :configuration=, 'The build configruation to use (e.g., --configuration=Release)', :default => 'Debug'
     on :'sdk-version=', 'The SDK version to use (e.g., --sdk-version=6.1)'
     on :verbose, 'Be verbose'
+    on :'run-all', 'Run all tests despite failures'
 
     run { ran_command = 'test' }
   end

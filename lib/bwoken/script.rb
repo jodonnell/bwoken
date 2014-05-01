@@ -18,6 +18,7 @@ module Bwoken
     attr_accessor :formatter
     attr_accessor :simulator
     attr_accessor :app_dir
+    attr_accessor :run_all
 
     def initialize
       yield self if block_given?
@@ -52,7 +53,7 @@ module Bwoken
 
       Open3.popen3(cmd) do |stdin, stdout, stderr, wait_thr|
         exit_status = formatter.format stdout
-        raise ScriptFailedError.new('Test Script Failed') unless exit_status == 0
+        raise ScriptFailedError.new('Test Script Failed') if exit_status != 0 and !run_all
       end
     end
 
