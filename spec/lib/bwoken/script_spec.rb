@@ -49,6 +49,13 @@ describe Bwoken::Script do
         subject.stub(:cmd)
         expect { subject.run }.to raise_error(Bwoken::ScriptFailedError)
       end
+
+      it 'does not raise a ScriptFailedError if run all is passed' do
+        subject.run_all = true
+        Open3.stub(:popen3).and_yield(*%w(in out err thr))
+        subject.stub(:cmd)
+        expect { subject.run }.not_to raise_error
+      end
     end
 
     it 'formats the output with the bwoken formatter' do

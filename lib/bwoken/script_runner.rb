@@ -8,6 +8,7 @@ module Bwoken
     attr_accessor :formatter
     attr_accessor :simulator
     attr_accessor :app_dir
+    attr_accessor :run_all
 
     alias_method :feature_names, :focus
 
@@ -40,6 +41,7 @@ module Bwoken
         sr.formatter = formatter
         sr.simulator = simulator
         sr.app_dir = app_dir
+        sr.run_all = run_all
       end
     end
 
@@ -60,6 +62,7 @@ module Bwoken
         dr.focus = focus
         dr.formatter = formatter
         dr.app_dir = app_dir
+        dr.run_all = run_all
       end
     end
 
