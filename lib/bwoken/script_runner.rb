@@ -9,6 +9,7 @@ module Bwoken
     attr_accessor :simulator
     attr_accessor :app_dir
     attr_accessor :run_all
+    attr_accessor :retries
 
     alias_method :feature_names, :focus
 
@@ -42,6 +43,7 @@ module Bwoken
         sr.simulator = simulator
         sr.app_dir = app_dir
         sr.run_all = run_all
+        sr.retries = retries
       end
     end
 
@@ -63,6 +65,7 @@ module Bwoken
         dr.formatter = formatter
         dr.app_dir = app_dir
         dr.run_all = run_all
+        dr.retries = retries
       end
     end
 

@@ -7,6 +7,7 @@ module Bwoken
     attr_accessor :formatter
     attr_accessor :app_dir
     attr_accessor :run_all
+    attr_accessor :retries
 
     alias_method :feature_names, :focus
 
@@ -31,6 +32,7 @@ module Bwoken
           s.formatter = formatter
           s.app_dir = app_dir
           s.run_all = run_all
+          s.retries = retries
         end
       end
     end
