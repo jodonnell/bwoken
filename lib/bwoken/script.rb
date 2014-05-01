@@ -18,6 +18,7 @@ module Bwoken
     attr_accessor :formatter
     attr_accessor :simulator
     attr_accessor :app_dir
+    attr_accessor :retries
 
     def initialize
       yield self if block_given?
@@ -48,10 +49,14 @@ module Bwoken
     end
 
     def run
-      formatter.before_script_run path
+      run_with_retries retries
+    end
 
+    def run_with_retries retries_remaining = 2
+      formatter.before_script_run path
       Open3.popen3(cmd) do |stdin, stdout, stderr, wait_thr|
         exit_status = formatter.format stdout
+        return run_with_retries(retries_remaining - 1) if exit_status != 0 and retries_remaining != 0
         raise ScriptFailedError.new('Test Script Failed') unless exit_status == 0
       end
     end

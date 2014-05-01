@@ -51,6 +51,7 @@ BANNER
       #       :product-name     - the name of the generated .app file if it is different from the name of the project/workspace
       #       :configuration    - typically "Debug" or "Release"
       #       :sdk-version      - the version of the sdk to use when building
+      #       :retry            - number of times a failed test will retry
       def initialize opts
         opts = opts.to_hash if opts.is_a?(Slop)
         self.options = opts.to_hash.tap do |o|
@@ -58,6 +59,7 @@ BANNER
           o[:formatter] = select_formatter(o[:formatter])
           o[:simulator] = use_simulator?(o[:simulator])
           o[:family] = o[:family]
+          o[:retry] = o[:retry].to_i
         end
 
         Bwoken.integration_path = options[:'integration-path']
@@ -110,6 +112,7 @@ BANNER
           s.focus = options[:focus]
           s.formatter = options[:formatter]
           s.simulator = options[:simulator]
+          s.retries = options[:retry]
         end.execute
       end
 

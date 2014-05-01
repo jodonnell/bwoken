@@ -37,6 +37,7 @@ opts = Slop.parse :help => true do
     on :configuration=, 'The build configruation to use (e.g., --configuration=Release)', :default => 'Debug'
     on :'sdk-version=', 'The SDK version to use (e.g., --sdk-version=6.1)'
     on :verbose, 'Be verbose'
+    on :retry=, 'Specify number of times to retry a failing test (e.g., --retry=1)', :default => 0
 
     run { ran_command = 'test' }
   end

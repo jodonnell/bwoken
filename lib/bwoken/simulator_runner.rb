@@ -9,6 +9,7 @@ module Bwoken
     attr_accessor :simulator
     attr_accessor :app_dir
     attr_accessor :device_family
+    attr_accessor :retries
 
     alias_method :feature_names, :focus
 
@@ -29,6 +30,7 @@ module Bwoken
           s.formatter = formatter
           s.simulator = simulator
           s.app_dir = app_dir
+          s.retries = retries
         end
       end
     end

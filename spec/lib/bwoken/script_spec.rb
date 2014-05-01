@@ -17,6 +17,7 @@ describe Bwoken::Script do
     before do
       subject.formatter.stub(:format).and_return(exit_status)
       subject.formatter.stub(:before_script_run)
+      subject.retries = 0
     end
 
     it 'outputs that a script is about to run' do
@@ -49,6 +50,15 @@ describe Bwoken::Script do
         subject.stub(:cmd)
         expect { subject.run }.to raise_error(Bwoken::ScriptFailedError)
       end
+
+      it 'will retry a failing test' do
+        subject.retries = 2
+        subject.should_receive(:run_with_retries).exactly(3).times.and_call_original
+        Open3.stub(:popen3).and_yield(*%w(in out err thr))
+        subject.stub(:cmd)
+        expect { subject.run }.to raise_error(Bwoken::ScriptFailedError)
+      end
+
     end
 
     it 'formats the output with the bwoken formatter' do
